@@ -55,7 +55,7 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessage } from "element-plus";
-import axios from "axios";
+import request from "../../utils/request";
 
 const router = useRouter();
 const route = useRoute();
@@ -102,15 +102,16 @@ const handleSubmit = async () => {
     if (valid) {
       try {
         if (route.params.id) {
-          await axios.put(`/api/suppliers/${route.params.id}`, form);
+          await request.put(`/api/suppliers/${route.params.id}`, form);
           ElMessage.success("更新成功");
         } else {
-          await axios.post("/api/suppliers", form);
+          await request.post("/api/suppliers", form);
           ElMessage.success("创建成功");
         }
         router.push("/suppliers");
-      } catch (error) {
-        ElMessage.error(route.params.id ? "更新失败" : "创建失败");
+      } catch (error: any) {
+        console.error('操作失败:', error);
+        ElMessage.error(error.response?.data?.message || (route.params.id ? "更新失败" : "创建失败"));
       }
     }
   });
@@ -122,10 +123,11 @@ const handleCancel = () => {
 
 const loadSupplier = async (id: string) => {
   try {
-    const response = await axios.get(`/api/suppliers/${id}`);
+    const response = await request.get(`/api/suppliers/${id}`);
     Object.assign(form, response.data.data);
-  } catch (error) {
-    ElMessage.error("获取供应商信息失败");
+  } catch (error: any) {
+    console.error('获取供应商信息失败:', error);
+    ElMessage.error(error.response?.data?.message || "获取供应商信息失败");
     router.push("/suppliers");
   }
 };

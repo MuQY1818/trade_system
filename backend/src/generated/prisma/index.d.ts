@@ -1893,30 +1893,42 @@ export namespace Prisma {
 
   export type SupplierMinAggregateOutputType = {
     id: number | null
-    name: string | null
-    contact: string | null
-    phone: string | null
+    supplier_name: string | null
+    contact_person: string | null
+    contact_phone: string | null
+    email: string | null
     address: string | null
+    product_category: string | null
+    credit_rating: string | null
+    remarks: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type SupplierMaxAggregateOutputType = {
     id: number | null
-    name: string | null
-    contact: string | null
-    phone: string | null
+    supplier_name: string | null
+    contact_person: string | null
+    contact_phone: string | null
+    email: string | null
     address: string | null
+    product_category: string | null
+    credit_rating: string | null
+    remarks: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type SupplierCountAggregateOutputType = {
     id: number
-    name: number
-    contact: number
-    phone: number
+    supplier_name: number
+    contact_person: number
+    contact_phone: number
+    email: number
     address: number
+    product_category: number
+    credit_rating: number
+    remarks: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1933,30 +1945,42 @@ export namespace Prisma {
 
   export type SupplierMinAggregateInputType = {
     id?: true
-    name?: true
-    contact?: true
-    phone?: true
+    supplier_name?: true
+    contact_person?: true
+    contact_phone?: true
+    email?: true
     address?: true
+    product_category?: true
+    credit_rating?: true
+    remarks?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type SupplierMaxAggregateInputType = {
     id?: true
-    name?: true
-    contact?: true
-    phone?: true
+    supplier_name?: true
+    contact_person?: true
+    contact_phone?: true
+    email?: true
     address?: true
+    product_category?: true
+    credit_rating?: true
+    remarks?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type SupplierCountAggregateInputType = {
     id?: true
-    name?: true
-    contact?: true
-    phone?: true
+    supplier_name?: true
+    contact_person?: true
+    contact_phone?: true
+    email?: true
     address?: true
+    product_category?: true
+    credit_rating?: true
+    remarks?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2050,10 +2074,14 @@ export namespace Prisma {
 
   export type SupplierGroupByOutputType = {
     id: number
-    name: string
-    contact: string | null
-    phone: string | null
-    address: string | null
+    supplier_name: string
+    contact_person: string
+    contact_phone: string
+    email: string
+    address: string
+    product_category: string
+    credit_rating: string
+    remarks: string | null
     createdAt: Date
     updatedAt: Date
     _count: SupplierCountAggregateOutputType | null
@@ -2079,10 +2107,14 @@ export namespace Prisma {
 
   export type SupplierSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    contact?: boolean
-    phone?: boolean
+    supplier_name?: boolean
+    contact_person?: boolean
+    contact_phone?: boolean
+    email?: boolean
     address?: boolean
+    product_category?: boolean
+    credit_rating?: boolean
+    remarks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["supplier"]>
@@ -2091,25 +2123,33 @@ export namespace Prisma {
 
   export type SupplierSelectScalar = {
     id?: boolean
-    name?: boolean
-    contact?: boolean
-    phone?: boolean
+    supplier_name?: boolean
+    contact_person?: boolean
+    contact_phone?: boolean
+    email?: boolean
     address?: boolean
+    product_category?: boolean
+    credit_rating?: boolean
+    remarks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SupplierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "contact" | "phone" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["supplier"]>
+  export type SupplierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "supplier_name" | "contact_person" | "contact_phone" | "email" | "address" | "product_category" | "credit_rating" | "remarks" | "createdAt" | "updatedAt", ExtArgs["result"]["supplier"]>
 
   export type $SupplierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Supplier"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      name: string
-      contact: string | null
-      phone: string | null
-      address: string | null
+      supplier_name: string
+      contact_person: string
+      contact_phone: string
+      email: string
+      address: string
+      product_category: string
+      credit_rating: string
+      remarks: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["supplier"]>
@@ -2482,10 +2522,14 @@ export namespace Prisma {
    */
   interface SupplierFieldRefs {
     readonly id: FieldRef<"Supplier", 'Int'>
-    readonly name: FieldRef<"Supplier", 'String'>
-    readonly contact: FieldRef<"Supplier", 'String'>
-    readonly phone: FieldRef<"Supplier", 'String'>
+    readonly supplier_name: FieldRef<"Supplier", 'String'>
+    readonly contact_person: FieldRef<"Supplier", 'String'>
+    readonly contact_phone: FieldRef<"Supplier", 'String'>
+    readonly email: FieldRef<"Supplier", 'String'>
     readonly address: FieldRef<"Supplier", 'String'>
+    readonly product_category: FieldRef<"Supplier", 'String'>
+    readonly credit_rating: FieldRef<"Supplier", 'String'>
+    readonly remarks: FieldRef<"Supplier", 'String'>
     readonly createdAt: FieldRef<"Supplier", 'DateTime'>
     readonly updatedAt: FieldRef<"Supplier", 'DateTime'>
   }
@@ -2837,10 +2881,14 @@ export namespace Prisma {
 
   export const SupplierScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    contact: 'contact',
-    phone: 'phone',
+    supplier_name: 'supplier_name',
+    contact_person: 'contact_person',
+    contact_phone: 'contact_phone',
+    email: 'email',
     address: 'address',
+    product_category: 'product_category',
+    credit_rating: 'credit_rating',
+    remarks: 'remarks',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -2874,10 +2922,14 @@ export namespace Prisma {
 
 
   export const SupplierOrderByRelevanceFieldEnum: {
-    name: 'name',
-    contact: 'contact',
-    phone: 'phone',
-    address: 'address'
+    supplier_name: 'supplier_name',
+    contact_person: 'contact_person',
+    contact_phone: 'contact_phone',
+    email: 'email',
+    address: 'address',
+    product_category: 'product_category',
+    credit_rating: 'credit_rating',
+    remarks: 'remarks'
   };
 
   export type SupplierOrderByRelevanceFieldEnum = (typeof SupplierOrderByRelevanceFieldEnum)[keyof typeof SupplierOrderByRelevanceFieldEnum]
@@ -2984,20 +3036,28 @@ export namespace Prisma {
     OR?: SupplierWhereInput[]
     NOT?: SupplierWhereInput | SupplierWhereInput[]
     id?: IntFilter<"Supplier"> | number
-    name?: StringFilter<"Supplier"> | string
-    contact?: StringNullableFilter<"Supplier"> | string | null
-    phone?: StringNullableFilter<"Supplier"> | string | null
-    address?: StringNullableFilter<"Supplier"> | string | null
+    supplier_name?: StringFilter<"Supplier"> | string
+    contact_person?: StringFilter<"Supplier"> | string
+    contact_phone?: StringFilter<"Supplier"> | string
+    email?: StringFilter<"Supplier"> | string
+    address?: StringFilter<"Supplier"> | string
+    product_category?: StringFilter<"Supplier"> | string
+    credit_rating?: StringFilter<"Supplier"> | string
+    remarks?: StringNullableFilter<"Supplier"> | string | null
     createdAt?: DateTimeFilter<"Supplier"> | Date | string
     updatedAt?: DateTimeFilter<"Supplier"> | Date | string
   }
 
   export type SupplierOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
-    contact?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
-    address?: SortOrderInput | SortOrder
+    supplier_name?: SortOrder
+    contact_person?: SortOrder
+    contact_phone?: SortOrder
+    email?: SortOrder
+    address?: SortOrder
+    product_category?: SortOrder
+    credit_rating?: SortOrder
+    remarks?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _relevance?: SupplierOrderByRelevanceInput
@@ -3008,20 +3068,28 @@ export namespace Prisma {
     AND?: SupplierWhereInput | SupplierWhereInput[]
     OR?: SupplierWhereInput[]
     NOT?: SupplierWhereInput | SupplierWhereInput[]
-    name?: StringFilter<"Supplier"> | string
-    contact?: StringNullableFilter<"Supplier"> | string | null
-    phone?: StringNullableFilter<"Supplier"> | string | null
-    address?: StringNullableFilter<"Supplier"> | string | null
+    supplier_name?: StringFilter<"Supplier"> | string
+    contact_person?: StringFilter<"Supplier"> | string
+    contact_phone?: StringFilter<"Supplier"> | string
+    email?: StringFilter<"Supplier"> | string
+    address?: StringFilter<"Supplier"> | string
+    product_category?: StringFilter<"Supplier"> | string
+    credit_rating?: StringFilter<"Supplier"> | string
+    remarks?: StringNullableFilter<"Supplier"> | string | null
     createdAt?: DateTimeFilter<"Supplier"> | Date | string
     updatedAt?: DateTimeFilter<"Supplier"> | Date | string
   }, "id">
 
   export type SupplierOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
-    contact?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
-    address?: SortOrderInput | SortOrder
+    supplier_name?: SortOrder
+    contact_person?: SortOrder
+    contact_phone?: SortOrder
+    email?: SortOrder
+    address?: SortOrder
+    product_category?: SortOrder
+    credit_rating?: SortOrder
+    remarks?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SupplierCountOrderByAggregateInput
@@ -3036,10 +3104,14 @@ export namespace Prisma {
     OR?: SupplierScalarWhereWithAggregatesInput[]
     NOT?: SupplierScalarWhereWithAggregatesInput | SupplierScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Supplier"> | number
-    name?: StringWithAggregatesFilter<"Supplier"> | string
-    contact?: StringNullableWithAggregatesFilter<"Supplier"> | string | null
-    phone?: StringNullableWithAggregatesFilter<"Supplier"> | string | null
-    address?: StringNullableWithAggregatesFilter<"Supplier"> | string | null
+    supplier_name?: StringWithAggregatesFilter<"Supplier"> | string
+    contact_person?: StringWithAggregatesFilter<"Supplier"> | string
+    contact_phone?: StringWithAggregatesFilter<"Supplier"> | string
+    email?: StringWithAggregatesFilter<"Supplier"> | string
+    address?: StringWithAggregatesFilter<"Supplier"> | string
+    product_category?: StringWithAggregatesFilter<"Supplier"> | string
+    credit_rating?: StringWithAggregatesFilter<"Supplier"> | string
+    remarks?: StringNullableWithAggregatesFilter<"Supplier"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Supplier"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Supplier"> | Date | string
   }
@@ -3105,68 +3177,96 @@ export namespace Prisma {
   }
 
   export type SupplierCreateInput = {
-    name: string
-    contact?: string | null
-    phone?: string | null
-    address?: string | null
+    supplier_name: string
+    contact_person: string
+    contact_phone: string
+    email: string
+    address: string
+    product_category: string
+    credit_rating: string
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type SupplierUncheckedCreateInput = {
     id?: number
-    name: string
-    contact?: string | null
-    phone?: string | null
-    address?: string | null
+    supplier_name: string
+    contact_person: string
+    contact_phone: string
+    email: string
+    address: string
+    product_category: string
+    credit_rating: string
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type SupplierUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    supplier_name?: StringFieldUpdateOperationsInput | string
+    contact_person?: StringFieldUpdateOperationsInput | string
+    contact_phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    product_category?: StringFieldUpdateOperationsInput | string
+    credit_rating?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupplierUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    supplier_name?: StringFieldUpdateOperationsInput | string
+    contact_person?: StringFieldUpdateOperationsInput | string
+    contact_phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    product_category?: StringFieldUpdateOperationsInput | string
+    credit_rating?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupplierCreateManyInput = {
     id?: number
-    name: string
-    contact?: string | null
-    phone?: string | null
-    address?: string | null
+    supplier_name: string
+    contact_person: string
+    contact_phone: string
+    email: string
+    address: string
+    product_category: string
+    credit_rating: string
+    remarks?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type SupplierUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    supplier_name?: StringFieldUpdateOperationsInput | string
+    contact_person?: StringFieldUpdateOperationsInput | string
+    contact_phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    product_category?: StringFieldUpdateOperationsInput | string
+    credit_rating?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupplierUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
+    supplier_name?: StringFieldUpdateOperationsInput | string
+    contact_person?: StringFieldUpdateOperationsInput | string
+    contact_phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    product_category?: StringFieldUpdateOperationsInput | string
+    credit_rating?: StringFieldUpdateOperationsInput | string
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3325,10 +3425,14 @@ export namespace Prisma {
 
   export type SupplierCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    contact?: SortOrder
-    phone?: SortOrder
+    supplier_name?: SortOrder
+    contact_person?: SortOrder
+    contact_phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
+    product_category?: SortOrder
+    credit_rating?: SortOrder
+    remarks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3339,20 +3443,28 @@ export namespace Prisma {
 
   export type SupplierMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    contact?: SortOrder
-    phone?: SortOrder
+    supplier_name?: SortOrder
+    contact_person?: SortOrder
+    contact_phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
+    product_category?: SortOrder
+    credit_rating?: SortOrder
+    remarks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SupplierMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    contact?: SortOrder
-    phone?: SortOrder
+    supplier_name?: SortOrder
+    contact_person?: SortOrder
+    contact_phone?: SortOrder
+    email?: SortOrder
     address?: SortOrder
+    product_category?: SortOrder
+    credit_rating?: SortOrder
+    remarks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

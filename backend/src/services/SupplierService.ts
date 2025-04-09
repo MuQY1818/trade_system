@@ -2,17 +2,17 @@ import { prisma } from '../app';
 
 export class SupplierService {
     async findAll(query: any) {
-        const { name, contact, phone, page = 1, pageSize = 10 } = query;
+        const { supplier_name, product_category, contact_person, page = 1, pageSize = 10 } = query;
         
         const where: any = {};
-        if (name) {
-            where.name = { contains: name };
+        if (supplier_name) {
+            where.supplier_name = { contains: supplier_name };
         }
-        if (contact) {
-            where.contact = { contains: contact };
+        if (contact_person) {
+            where.contact_person = { contains: contact_person };
         }
-        if (phone) {
-            where.phone = { contains: phone };
+        if (product_category) {
+            where.product_category = { contains: product_category };
         }
 
         const skip = (page - 1) * pageSize;
@@ -36,9 +36,15 @@ export class SupplierService {
     }
 
     async findOne(id: number) {
-        return prisma.supplier.findUnique({
+        const supplier = await prisma.supplier.findUnique({
             where: { id }
         });
+
+        if (!supplier) {
+            throw new Error('供应商不存在');
+        }
+
+        return supplier;
     }
 
     async create(data: any) {

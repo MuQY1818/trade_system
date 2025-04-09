@@ -128,10 +128,14 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.SupplierScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  contact: 'contact',
-  phone: 'phone',
+  supplier_name: 'supplier_name',
+  contact_person: 'contact_person',
+  contact_phone: 'contact_phone',
+  email: 'email',
   address: 'address',
+  product_category: 'product_category',
+  credit_rating: 'credit_rating',
+  remarks: 'remarks',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -153,10 +157,14 @@ exports.Prisma.NullsOrder = {
 };
 
 exports.Prisma.SupplierOrderByRelevanceFieldEnum = {
-  name: 'name',
-  contact: 'contact',
-  phone: 'phone',
-  address: 'address'
+  supplier_name: 'supplier_name',
+  contact_person: 'contact_person',
+  contact_phone: 'contact_phone',
+  email: 'email',
+  address: 'address',
+  product_category: 'product_category',
+  credit_rating: 'credit_rating',
+  remarks: 'remarks'
 };
 
 

@@ -24,11 +24,15 @@ model User {
 }
 
 model Supplier {
-  id          Int      @id @default(autoincrement())
-  name        String
-  contact     String?
-  phone       String?
-  address     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  supplier_name   String   @db.VarChar(191)
+  contact_person  String   @db.VarChar(191)
+  contact_phone   String   @db.VarChar(191)
+  email          String   @db.VarChar(191)
+  address        String   @db.VarChar(191)
+  product_category String  @db.VarChar(191)
+  credit_rating  String   @db.VarChar(191)
+  remarks        String?  @db.Text
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

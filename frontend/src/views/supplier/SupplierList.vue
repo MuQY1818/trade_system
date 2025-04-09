@@ -56,7 +56,7 @@
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
-import axios from "axios";
+import request from "../../utils/request";
 
 const router = useRouter();
 const supplierList = ref([]);
@@ -69,10 +69,11 @@ const searchForm = reactive({
 
 const handleSearch = async () => {
   try {
-    const response = await axios.get("/api/suppliers", { params: searchForm });
-    supplierList.value = response.data.data;
-  } catch (error) {
-    ElMessage.error("获取供应商列表失败");
+    const response = await request.get("/api/suppliers", { params: searchForm });
+    supplierList.value = response.data.data.items;
+  } catch (error: any) {
+    console.error('获取供应商列表失败:', error);
+    ElMessage.error(error.response?.data?.message || "获取供应商列表失败");
   }
 };
 
@@ -96,12 +97,13 @@ const handleDelete = async (row: any) => {
     await ElMessageBox.confirm("确认删除该供应商吗？", "提示", {
       type: "warning",
     });
-    await axios.delete(`/api/suppliers/${row.id}`);
+    await request.delete(`/api/suppliers/${row.id}`);
     ElMessage.success("删除成功");
     handleSearch();
-  } catch (error) {
+  } catch (error: any) {
     if (error !== "cancel") {
-      ElMessage.error("删除失败");
+      console.error('删除失败:', error);
+      ElMessage.error(error.response?.data?.message || "删除失败");
     }
   }
 };
