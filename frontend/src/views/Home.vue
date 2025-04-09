@@ -29,7 +29,7 @@
             </div>
           </template>
           <div class="card-content">
-            <el-statistic title="供应商总数" :value="0">
+            <el-statistic title="供应商总数" :value="statistics.supplierCount">
               <template #suffix>
                 <span>家</span>
               </template>
@@ -45,7 +45,7 @@
             </div>
           </template>
           <div class="card-content">
-            <el-statistic title="本月采购订单" :value="0">
+            <el-statistic title="本月采购订单" :value="statistics.purchaseOrderCount">
               <template #suffix>
                 <span>笔</span>
               </template>
@@ -61,7 +61,7 @@
             </div>
           </template>
           <div class="card-content">
-            <el-statistic title="本月销售订单" :value="0">
+            <el-statistic title="本月销售订单" :value="statistics.salesOrderCount">
               <template #suffix>
                 <span>笔</span>
               </template>
@@ -74,10 +74,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted } from "vue";
+import { useStatisticsStore } from "../stores/statistics";
+import { storeToRefs } from 'pinia';
 
-const supplierCount = ref(0);
-const purchaseOrderCount = ref(0);
+const statisticsStore = useStatisticsStore();
+const statistics = storeToRefs(statisticsStore);
+
+onMounted(() => {
+  statisticsStore.loadStatistics();
+});
 </script>
 
 <style scoped>

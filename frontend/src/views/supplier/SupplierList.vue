@@ -57,8 +57,10 @@ import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
 import request from "../../utils/request";
+import { useStatisticsStore } from "../../stores/statistics";
 
 const router = useRouter();
+const statisticsStore = useStatisticsStore();
 const supplierList = ref([]);
 
 const searchForm = reactive({
@@ -71,6 +73,7 @@ const handleSearch = async () => {
   try {
     const response = await request.get("/api/suppliers", { params: searchForm });
     supplierList.value = response.data.data.items;
+    statisticsStore.updateSupplierCount(response.data.data.total);
   } catch (error: any) {
     console.error('获取供应商列表失败:', error);
     ElMessage.error(error.response?.data?.message || "获取供应商列表失败");
@@ -99,7 +102,7 @@ const handleDelete = async (row: any) => {
     });
     await request.delete(`/api/suppliers/${row.id}`);
     ElMessage.success("删除成功");
-    handleSearch();
+    await handleSearch();
   } catch (error: any) {
     if (error !== "cancel") {
       console.error('删除失败:', error);

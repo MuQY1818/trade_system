@@ -56,9 +56,11 @@ import { ref, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessage } from "element-plus";
 import request from "../../utils/request";
+import { useStatisticsStore } from "../../stores/statistics";
 
 const router = useRouter();
 const route = useRoute();
+const statisticsStore = useStatisticsStore();
 const formRef = ref();
 
 const form = reactive({
@@ -108,6 +110,7 @@ const handleSubmit = async () => {
           await request.post("/api/suppliers", form);
           ElMessage.success("创建成功");
         }
+        await statisticsStore.loadStatistics();
         router.push("/suppliers");
       } catch (error: any) {
         console.error('操作失败:', error);
