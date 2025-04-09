@@ -14,6 +14,10 @@
           <el-icon><User /></el-icon>
           <span>供应商管理</span>
         </el-menu-item>
+        <el-menu-item index="/products">
+          <el-icon><Goods /></el-icon>
+          <span>商品管理</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>
@@ -30,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { House, User } from "@element-plus/icons-vue";
+import { House, User, Goods } from "@element-plus/icons-vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();

@@ -38,7 +38,6 @@ import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import type { FormInstance, FormRules } from 'element-plus';
-import type { AxiosResponse } from 'axios';
 import request from "../../utils/request";
 
 interface LoginResponse {
@@ -46,14 +45,9 @@ interface LoginResponse {
   user: {
     id: number;
     username: string;
-    email: string;
+    real_name: string;
+    role: string;
   };
-}
-
-interface ApiResponse {
-  code: number;
-  data: LoginResponse;
-  message: string;
 }
 
 const router = useRouter();
@@ -78,13 +72,11 @@ const handleLogin = async () => {
       try {
         loading.value = true;
         console.log('开始登录请求:', form);
-        const response: AxiosResponse<ApiResponse> = await request.post("/api/auth/login", form);
+        const response = await request.post("/api/auth/login", form);
         
-        if (!response.data || response.data.code !== 200) {
-          throw new Error(response.data?.message || '登录失败');
-        }
-
-        const { token, user } = response.data.data;
+        console.log('登录响应:', response.data);
+        
+        const { token, user } = response.data;
         if (!token || !user) {
           throw new Error('登录响应数据不完整');
         }

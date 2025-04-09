@@ -36,3 +36,25 @@ model Supplier {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  code            String   @unique @db.VarChar(50)     // 商品编码
+  name            String   @db.VarChar(100)            // 商品名称
+  specification   String?  @db.VarChar(100)            // 规格型号
+  unit            String   @db.VarChar(20)             // 单位
+  category        String   @db.VarChar(50)             // 商品分类
+  price           Decimal  @db.Decimal(10, 2)          // 标准价格
+  cost            Decimal  @db.Decimal(10, 2)          // 成本价格
+  min_stock       Int      @default(0)                 // 最小库存
+  max_stock       Int      @default(9999)              // 最大库存
+  current_stock   Int      @default(0)                 // 当前库存
+  status          String   @default("active")          // 状态：active-启用，inactive-停用
+  description     String?  @db.Text                    // 商品描述
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([code])
+  @@index([category])
+  @@index([status])
+}

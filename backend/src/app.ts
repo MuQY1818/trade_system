@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import supplierRoutes from "./routes/supplier.routes";
 import authRoutes from './routes/auth';
+import productRoutes from './routes/product.routes';
 import { PrismaClient } from './generated/prisma';
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 // 路由
 app.use("/api", supplierRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api', productRoutes);
 
 // 错误处理中间件
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

@@ -140,6 +140,24 @@ exports.Prisma.SupplierScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  specification: 'specification',
+  unit: 'unit',
+  category: 'category',
+  price: 'price',
+  cost: 'cost',
+  min_stock: 'min_stock',
+  max_stock: 'max_stock',
+  current_stock: 'current_stock',
+  status: 'status',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -167,10 +185,21 @@ exports.Prisma.SupplierOrderByRelevanceFieldEnum = {
   remarks: 'remarks'
 };
 
+exports.Prisma.ProductOrderByRelevanceFieldEnum = {
+  code: 'code',
+  name: 'name',
+  specification: 'specification',
+  unit: 'unit',
+  category: 'category',
+  status: 'status',
+  description: 'description'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Supplier: 'Supplier'
+  Supplier: 'Supplier',
+  Product: 'Product'
 };
 
 /**
