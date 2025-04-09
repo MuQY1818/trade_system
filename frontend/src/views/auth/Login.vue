@@ -50,6 +50,12 @@ interface LoginResponse {
   };
 }
 
+interface ApiResponse {
+  code: number;
+  data: LoginResponse;
+  message: string;
+}
+
 const router = useRouter();
 const formRef = ref<FormInstance>();
 const loading = ref(false);
@@ -72,18 +78,42 @@ const handleLogin = async () => {
       try {
         loading.value = true;
         console.log('开始登录请求:', form);
-        const response = await request.post("/api/auth/login", form);
+        const response = await request.post<ApiResponse>("/api/auth/login", form);
         
-        console.log('登录响应:', response.data);
+        console.log('登录响应:', {
+          status: response.status,
+          statusText: response.statusText,
+          data: response.data
+        });
         
-        const { token, user } = response.data;
-        if (!token || !user) {
+        if (!response.data || !response.data.data) {
+          console.error('登录响应数据不完整:', response.data);
           throw new Error('登录响应数据不完整');
         }
+
+        const { token, user } = response.data.data;
+        if (!token || !user) {
+          console.error('token或user数据缺失:', { token: !!token, user: !!user });
+          throw new Error('登录响应数据不完整');
+        }
+
+        console.log('准备保存token和用户信息:', {
+          tokenLength: token.length,
+          user: { ...user, id: user.id }
+        });
 
         // 保存token和用户信息
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
+
+        // 验证token是否正确保存
+        const savedToken = localStorage.getItem("token");
+        const savedUser = localStorage.getItem("user");
+        console.log('验证存储:', {
+          tokenMatches: savedToken === token,
+          tokenLength: savedToken?.length,
+          userExists: !!savedUser
+        });
 
         ElMessage.success("登录成功");
         

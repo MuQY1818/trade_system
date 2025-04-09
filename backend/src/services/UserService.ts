@@ -78,14 +78,19 @@ export class UserService {
                 throw new Error("密码错误");
             }
 
+            const secret = process.env.JWT_SECRET;
+            if (!secret) {
+                throw new Error("JWT_SECRET未配置");
+            }
+
             // 生成 JWT token
             const token = jwt.sign(
                 {
-                    id: user.id,
+                    userId: user.id,
                     username: user.username,
                     role: user.role
                 },
-                process.env.JWT_SECRET || 'your-secret-key',
+                secret,
                 { expiresIn: '24h' }
             );
             console.log("登录成功，已生成token");

@@ -18,7 +18,7 @@ interface AuthError {
 // 扩展请求类型
 interface CustomRequest extends Request {
     user?: {
-        id: number;
+        userId: number;
         username: string;
         role: string;
         iat?: number;
@@ -39,8 +39,18 @@ const handleAuthError = (error: AuthError): { statusCode: number; body: { code: 
 
 export const authMiddleware = (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
+        console.log('认证中间件开始处理请求:', {
+            path: req.path,
+            method: req.method,
+            headers: {
+                ...req.headers,
+                authorization: req.headers.authorization ? '(已提供)' : '(未提供)'
+            }
+        });
+
         const authHeader = req.headers.authorization;
         if (!authHeader) {
+            console.log('未提供认证token - 请求头中没有Authorization');
             const error: AuthError = {
                 type: AuthErrorType.NO_TOKEN,
                 message: "未提供认证token",
@@ -50,8 +60,9 @@ export const authMiddleware = (req: CustomRequest, res: Response, next: NextFunc
             return res.status(statusCode).json(body);
         }
 
-        const token = authHeader.split(" ")[1];
-        if (!token) {
+        const parts = authHeader.split(" ");
+        if (parts.length !== 2 || parts[0] !== 'Bearer') {
+            console.log('token格式错误 - Authorization头格式应为: Bearer <token>');
             const error: AuthError = {
                 type: AuthErrorType.INVALID_FORMAT,
                 message: "token格式错误",
@@ -61,16 +72,44 @@ export const authMiddleware = (req: CustomRequest, res: Response, next: NextFunc
             return res.status(statusCode).json(body);
         }
 
+        const token = parts[1];
+        console.log('收到的token:', token);
+
         const secret = process.env.JWT_SECRET;
         if (!secret) {
+            console.error('JWT_SECRET环境变量未设置');
             throw new Error("JWT_SECRET环境变量未设置");
         }
 
-        const decoded = jwt.verify(token, secret) as CustomRequest["user"];
-        req.user = decoded;
-        
-        next();
+        console.log('使用的JWT_SECRET:', secret);
+        try {
+            const decoded = jwt.verify(token, secret) as {
+                userId: number;
+                username: string;
+                role: string;
+                iat: number;
+                exp: number;
+            };
+            console.log('token验证成功，解码后的用户信息:', {
+                userId: decoded.userId,
+                username: decoded.username,
+                role: decoded.role,
+                iat: decoded.iat,
+                exp: decoded.exp
+            });
+            
+            req.user = decoded;
+            next();
+        } catch (jwtError: any) {
+            console.error('JWT验证失败:', {
+                name: jwtError.name,
+                message: jwtError.message,
+                expiredAt: jwtError.expiredAt
+            });
+            throw jwtError;
+        }
     } catch (error) {
+        console.error('token验证失败:', error);
         const authError: AuthError = {
             type: AuthErrorType.INVALID_TOKEN,
             message: "无效的token",

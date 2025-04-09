@@ -32,13 +32,14 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response: AxiosResponse<ApiResponse>) => {
     const res = response.data
-    if (res.code !== 200) {
+    if (res.code && res.code !== 200) {
       ElMessage.error(res.message || '请求失败')
       return Promise.reject(new Error(res.message || '请求失败'))
     }
     return response
   },
   error => {
+    console.error('请求错误:', error)
     const message = error.response?.data?.message || error.message || '请求失败'
     if (error.response?.status === 401) {
       // 清除本地存储的认证信息

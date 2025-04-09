@@ -6,13 +6,16 @@ export class ProductController {
 
     async findAll(req: Request, res: Response) {
         try {
+            console.log('开始获取商品列表，查询参数:', req.query);
             const products = await this.productService.findAll(req.query);
+            console.log('获取商品列表成功，数据条数:', products.items.length);
             res.json({
                 code: 200,
                 data: products,
                 message: "获取商品列表成功"
             });
         } catch (error: any) {
+            console.error('获取商品列表失败:', error);
             res.status(500).json({
                 code: 500,
                 message: "获取商品列表失败",
@@ -93,13 +96,16 @@ export class ProductController {
 
     async getCategories(req: Request, res: Response) {
         try {
+            console.log('开始获取商品分类');
             const categories = await this.productService.getCategories();
+            console.log('获取商品分类成功，分类列表:', categories);
             res.json({
                 code: 200,
                 data: categories,
                 message: "获取商品分类成功"
             });
         } catch (error: any) {
+            console.error('获取商品分类失败:', error);
             res.status(500).json({
                 code: 500,
                 message: "获取商品分类失败",
